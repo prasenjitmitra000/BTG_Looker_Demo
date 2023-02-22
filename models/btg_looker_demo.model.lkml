@@ -4,6 +4,8 @@ connection: "looker_one_demo"
 # include all the views
 include: "/views/**/*.view"
 
+include: "/dashboard/**/*.dashboard"
+
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
 
@@ -26,3 +28,36 @@ persist_with: btg_looker_demo_default_datagroup
 # Each joined view also needs to define a primary key.
 
 explore: test {}
+
+explore: adventure_works_customers {
+  join: sales_consolidated {
+    type: left_outer
+    sql_on: ${adventure_works_customers.customer_key} =  ${sales_consolidated.customer_key};;
+    relationship: one_to_many
+  }
+
+  join: adventure_works_products {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${adventure_works_products.product_key} = ${sales_consolidated.product_key} ;;
+  }
+
+      join: adventure_works_product_subcategories {
+    type: left_outer
+    relationship: many_to_one
+    sql_on:${adventure_works_products.product_subcategory_key} = ${adventure_works_product_subcategories.product_subcategory_key}
+    ;;
+  }
+  join: adventure_works_product_categories {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${adventure_works_product_subcategories.product_category_key} = ${adventure_works_product_categories.product_category_key} ;;
+  }
+
+  join: adventure_works_returns {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${adventure_works_returns.product_key} = ${sales_consolidated.product_key} ;;
+  }
+
+}
