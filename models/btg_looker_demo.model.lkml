@@ -26,3 +26,35 @@ persist_with: btg_looker_demo_default_datagroup
 # Each joined view also needs to define a primary key.
 
 explore: test {}
+
+explore: adventure_works_sales_2015{
+  join: adventure_works_products {
+    type: inner
+    sql_on: ${adventure_works_sales_2015.product_key}=${adventure_works_products.product_key};;
+    relationship: one_to_one
+  }
+  join: adventure_works_customers{
+    type: inner
+    sql_on: ${adventure_works_sales_2015.customer_key}=${adventure_works_customers.customer_key} ;;
+    relationship: one_to_one
+  }
+}
+
+
+
+explore: adventure_works_products {
+  join: adventure_works_returns {
+    type: inner
+    sql_on: ${adventure_works_returns.product_key}=${adventure_works_products.product_key};;
+    relationship: one_to_one
+  }
+}
+
+
+explore: adventure_works_product_subcategories {
+  join: adventure_works_products {
+    type: inner
+    sql_on: ${adventure_works_products.product_subcategory_key}=${adventure_works_product_subcategories.product_category_key};;
+    relationship: one_to_one
+  }
+}
