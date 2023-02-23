@@ -12,7 +12,60 @@ view: adventure_works_products {
   # This dimension will be called "Model Name" in Explore.
 
   dimension: model_name {
-        type: string
+# <<<<<<< HEAD
+#         type: string
+#     sql: ${TABLE}.ModelName ;;
+#   }
+
+#   dimension: product_color {
+#     type: string
+#     sql: ${TABLE}.ProductColor ;;
+#   }
+
+#   dimension: product_cost {
+#     type: number
+#     sql: ${TABLE}.ProductCost ;;
+#   }
+
+#   measure: check {
+#     type: sum
+#     sql: ${TABLE}.ProductCost ;;
+#   }
+
+#   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
+#   # measures for this dimension, but you can also add measures of many different aggregates.
+#   # Click on the type parameter to see all the options in the Quick Help panel on the right.
+
+#   measure: total_product_cost {
+#     type: sum
+#     sql: ${product_cost} ;;
+#   }
+
+#   measure: average_product_cost {
+#     type: average
+#     sql: ${product_cost} ;;
+#   }
+
+#   dimension: product_description {
+#     type: string
+#     sql: ${TABLE}.ProductDescription ;;
+#   }
+
+#   dimension: product_key {
+#     type: number
+#     sql: ${TABLE}.ProductKey ;;
+#   }
+
+#   dimension: product_name {
+#     type: string
+#     sql: ${TABLE}.ProductName ;;
+#   }
+
+#   dimension: product_price {
+#     type: number
+#     sql: ${TABLE}.ProductPrice ;;
+# =======
+    type: string
     sql: ${TABLE}.ModelName ;;
   }
 
@@ -23,11 +76,6 @@ view: adventure_works_products {
 
   dimension: product_cost {
     type: number
-    sql: ${TABLE}.ProductCost ;;
-  }
-
-  measure: check {
-    type: sum
     sql: ${TABLE}.ProductCost ;;
   }
 
@@ -51,6 +99,7 @@ view: adventure_works_products {
   }
 
   dimension: product_key {
+    primary_key: yes
     type: number
     sql: ${TABLE}.ProductKey ;;
   }
@@ -64,6 +113,13 @@ view: adventure_works_products {
     type: number
     sql: ${TABLE}.ProductPrice ;;
   }
+
+#   measure: total_revenue {
+#     type: sum
+#     sql: ${sales_consolidated.Order_count_d} * ${product_price} ;;
+#     value_format:"$#.00;($#.00)"
+# # >>>>>>> branch 'master' of https://github.com/prasenjitmitra000/BTG_Looker_Demo.git
+#   }
 
   dimension: product_size {
     type: string

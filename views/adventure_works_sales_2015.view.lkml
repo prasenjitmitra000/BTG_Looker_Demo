@@ -30,11 +30,14 @@ view: adventure_works_sales_2015 {
     sql: ${customer_key} ;;
   }
 
+# <<<<<<< HEAD
   measure: totalorders{
     type: count_distinct
     sql: ${TABLE}.OrderNumber ;;
   }
 
+# =======
+# >>>>>>> branch 'master' of https://github.com/prasenjitmitra000/BTG_Looker_Demo.git
   # Dates and timestamps can be represented in Looker using a dimension group of type: time.
   # Looker converts dates and timestamps to the specified timeframes within the dimension group.
 

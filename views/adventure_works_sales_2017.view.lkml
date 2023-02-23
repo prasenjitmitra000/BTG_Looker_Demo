@@ -1,39 +1,39 @@
-# The name of this view in Looker is "Adventure Works Returns"
-view: adventure_works_returns {
+# The name of this view in Looker is "Adventure Works Sales 2017"
+view: adventure_works_sales_2017 {
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
-  sql_table_name: `ai-accelerators-dai.BTG_Looker_Demo.AdventureWorks_Returns`
+  sql_table_name: `ai-accelerators-dai.BTG_Looker_Demo.AdventureWorks_Sales_2017`
     ;;
   # No primary key is defined for this view. In order to join this view in an Explore,
   # define primary_key: yes on a dimension that has no repeated values.
 
   # Here's what a typical dimension looks like in LookML.
   # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Product Key" in Explore.
+  # This dimension will be called "Customer Key" in Explore.
 
-  dimension: product_key {
+  dimension: customer_key {
     type: number
-    sql: ${TABLE}.ProductKey ;;
+    sql: ${TABLE}.CustomerKey ;;
   }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
-  measure: total_product_key {
+  measure: total_customer_key {
     type: sum
-    sql: ${product_key} ;;
+    sql: ${customer_key} ;;
   }
 
-  measure: average_product_key {
+  measure: average_customer_key {
     type: average
-    sql: ${product_key} ;;
+    sql: ${customer_key} ;;
   }
 
   # Dates and timestamps can be represented in Looker using a dimension group of type: time.
   # Looker converts dates and timestamps to the specified timeframes within the dimension group.
 
-  dimension_group: return {
+  dimension_group: order {
     type: time
     timeframes: [
       raw,
@@ -45,40 +45,48 @@ view: adventure_works_returns {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.ReturnDate ;;
+    sql: ${TABLE}.OrderDate ;;
   }
 
-  dimension: return_quantity {
+  dimension: order_line_item {
     type: number
-    sql: ${TABLE}.ReturnQuantity ;;
+    sql: ${TABLE}.OrderLineItem ;;
   }
 
-# <<<<<<< HEAD
-#   dimension: territory_key {
-#     type: number
-#     sql: ${TABLE}.TerritoryKey ;;
-#   }
-# =======
-#   measure: return_m{
-#     type: sum
-#     sql: ${TABLE}.ReturnQuantity ;;
-#   }
+  dimension: order_number {
+    type: string
+    sql: ${TABLE}.OrderNumber ;;
+  }
 
-#   measure: return_rate {
-#     type:sum
-#     sql: (${return_quantity} / ${sales_consolidated.Order_count_d}) ;;
-#   }
+  dimension: order_quantity {
+    type: number
+    sql: ${TABLE}.OrderQuantity ;;
+  }
 
+  dimension: product_key {
+    type: number
+    sql: ${TABLE}.ProductKey ;;
+  }
 
+  dimension_group: stock {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.StockDate ;;
+  }
 
-#   dimension: territory_key {
-#     primary_key: yes
-#     type: number
-#     sql: ${TABLE}.TerritoryKey ;;
-#   }
-
-
-# >>>>>>> branch 'master' of https://github.com/prasenjitmitra000/BTG_Looker_Demo.git
+  dimension: territory_key {
+    type: number
+    sql: ${TABLE}.TerritoryKey ;;
+  }
 
   measure: count {
     type: count

@@ -16,6 +16,15 @@ view: adventure_works_product_categories {
     sql: ${TABLE}.CategoryName ;;
   }
 
+# <<<<<<< HEAD
+# =======
+#   dimension: drill_check {
+#     type: string
+#     sql: ${TABLE}.CategoryName ;;
+#     drill_fields: [adventure_works_product_subcategories.subcategory_name]
+#   }
+
+# >>>>>>> branch 'master' of https://github.com/prasenjitmitra000/BTG_Looker_Demo.git
   dimension: product_category_key {
     type: number
     sql: ${TABLE}.ProductCategoryKey ;;

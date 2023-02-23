@@ -30,6 +30,7 @@ view: adventure_works_customers {
     sql: ${annual_income} ;;
   }
 
+# <<<<<<< HEAD
 
   # Dates and timestamps can be represented in Looker using a dimension group of type: time.
   # Looker converts dates and timestamps to the specified timeframes within the dimension group.
@@ -49,7 +50,29 @@ view: adventure_works_customers {
     sql: ${TABLE}.BirthDate ;;
   }
 
+  # dimension: customer_key {
+# =======
+  # Dates and timestamps can be represented in Looker using a dimension group of type: time.
+  # Looker converts dates and timestamps to the specified timeframes within the dimension group.
+
+  # dimension_group: birth {
+  #   type: time
+  #   timeframes: [
+  #     raw,
+  #     date,
+  #     week,
+  #     month,
+  #     quarter,
+  #     year
+  #   ]
+  #   convert_tz: no
+  #   datatype: date
+  #   sql: ${TABLE}.BirthDate ;;
+  # }
+
   dimension: customer_key {
+    primary_key: yes
+# >>>>>>> branch 'master' of https://github.com/prasenjitmitra000/BTG_Looker_Demo.git
     type: number
     sql: ${TABLE}.CustomerKey ;;
   }
